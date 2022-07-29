@@ -25,9 +25,13 @@
                 <p>Your PHP application is now running on a container in Amazon ECS.</p>
                 <p>The container is running PHP version <?php echo phpversion(); ?>.</p>
                 <?php
-                        echo getenv('TEST_ENV');
+                    echo getenv('TEST_ENV');
                 ?>
+                <?php
 
+                    phpinfo();
+
+                ?>
             </div>
         </div>
 
