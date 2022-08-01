@@ -21,7 +21,7 @@ RUN apachectl restart
 
 # Install app
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer
-RUN composer global require hirak/prestissimo
+#RUN composer global require hirak/prestissimo
 
 WORKDIR /var/www/html
 RUN composer install
