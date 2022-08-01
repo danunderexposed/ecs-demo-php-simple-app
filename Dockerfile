@@ -18,7 +18,6 @@ RUN apachectl restart
 RUN rm -rf /var/www/html/* && mkdir -p /var/www/html
 ADD src /var/www/html
 
-
 # Configure apache
 RUN chown -R apache:apache /var/www
 ENV APACHE_RUN_USER apache
