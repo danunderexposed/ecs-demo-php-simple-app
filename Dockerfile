@@ -1,22 +1,19 @@
-FROM public.ecr.aws/amazonlinux/amazonlinux:2
+FROM php:7-fpm
 
-# Install dependencies
-RUN yum install -y \
-    curl \
-    httpd \
-    php \
- && ln -s /usr/sbin/httpd /usr/sbin/apache2
+ENV DEBIAN_FRONTEND noninteractive
 
-# Install app
-RUN rm -rf /var/www/html/* && mkdir -p /var/www/html
-ADD src /var/www/html
+RUN apt-get update && apt-get install -y git zlib1g-dev zip unzip
+RUN docker-php-ext-install zip
 
-# Configure apache
-RUN chown -R apache:apache /var/www
-ENV APACHE_RUN_USER apache
-ENV APACHE_RUN_GROUP apache
-ENV APACHE_LOG_DIR /var/log/apache2
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer
+RUN composer global require hirak/prestissimo
 
-EXPOSE 80
+RUN mkdir -p /app
+ADD . /app/
 
-CMD ["/usr/sbin/apache2", "-D",  "FOREGROUND"]
+WORKDIR /app
+
+RUN composer install
+RUN cp .env.example .env
+RUN php artisan key:generate
+RUN chmod -R a+w storage/ bootstrap/cache
