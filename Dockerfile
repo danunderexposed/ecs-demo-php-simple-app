@@ -7,6 +7,10 @@ RUN yum install -y \
     php \
  && ln -s /usr/sbin/httpd /usr/sbin/apache2
 
+RUN yum install -y amazon-linux-extras && amazon-linux-extras enable php7.4
+RUN yum clean metadata
+RUN yum install -y php
+
 # Install app
 RUN rm -rf /var/www/html/* && mkdir -p /var/www/html
 ADD src /var/www/html
