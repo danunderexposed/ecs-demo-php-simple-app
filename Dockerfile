@@ -12,11 +12,13 @@ RUN yum install -y amazon-linux-extras && amazon-linux-extras enable php7.4
 RUN yum clean metadata
 RUN yum install -y php
 RUN yum install -y php-cli php-pdo php-fpm php-json php-mysqlnd
+RUN sed -i -e 's/\/var\/www\/html/\/var\/www\/html\/public/g' httpd.conf
 RUN apachectl restart
 
 # Install app
 RUN rm -rf /var/www/html/* && mkdir -p /var/www/html
 ADD src /var/www/html
+
 
 # Configure apache
 RUN chown -R apache:apache /var/www
