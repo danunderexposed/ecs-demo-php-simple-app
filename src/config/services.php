@@ -30,25 +30,4 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
-    'wp_api' => [
-        'base_url' => env('WP_API_BASE_URL'),
-        'user' => env('WP_API_USER'),
-        'pass' => env('WP_API_PASSWORD'),
-    ],
-
-    'legacy_hasher_api' => [
-        'base_url' => env('LEGACY_HASHER_BASE_URL'),
-    ],
-
-    'google' => [
-        'client_id' => env('GOOGLE_CLIENT_ID'),
-        'client_secret' => env('GOOGLE_CLIENT_SECRET'),
-        'redirect' => env('GOOGLE_CLIENT_REDIRECT'),
-    ],
-
-    'facebook' => [
-        'client_id' => env('FACEBOOK_CLIENT_ID'),
-        'client_secret' => env('FACEBOOK_CLIENT_SECRET'),
-        'redirect' => env('FACEBOOK_CLIENT_REDIRECT'),
-    ],
 ];

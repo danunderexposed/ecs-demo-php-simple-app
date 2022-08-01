@@ -12,11 +12,22 @@ RUN yum install -y amazon-linux-extras && amazon-linux-extras enable php7.4
 RUN yum clean metadata
 RUN yum install -y php
 RUN yum install -y php-cli php-pdo php-fpm php-json php-mysqlnd
+
+RUN rm -rf /var/www/html/* && mkdir -p /var/www/html
+ADD src /var/www/html
+
+RUN sed -i -e 's/\/var\/www\/html/\/var\/www\/html\/public/g' /etc/httpd/conf/httpd.conf
 RUN apachectl restart
 
 # Install app
-RUN rm -rf /var/www/html/* && mkdir -p /var/www/html
-ADD src /var/www/html
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer
+RUN composer global require hirak/prestissimo
+
+WORKDIR /var/www/html
+RUN composer install
+
+RUN php artisan key:generate
+RUN chmod -R a+w storage/ bootstrap/cache
 
 # Configure apache
 RUN chown -R apache:apache /var/www
