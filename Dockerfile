@@ -11,7 +11,7 @@ RUN yum install -y \
 RUN yum install -y amazon-linux-extras && amazon-linux-extras enable php7.4
 RUN yum clean metadata
 RUN yum install -y php
-RUN yum install -y php-cli php-pdo php-fpm php-json php-mysqlnd php-xml php-dom
+RUN yum install -y php-cli php-common php-pdo php-fpm php-json php-mysqlnd php-xml php-dom php-mbstring php-zip
 
 RUN rm -rf /var/www/html/* && mkdir -p /var/www/html
 ADD src /var/www/html
