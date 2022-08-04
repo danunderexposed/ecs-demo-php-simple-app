@@ -15,6 +15,8 @@ return [
 
     'name' => env('APP_NAME', 'Laravel'),
 
+    'test_var' => env('TEST_ENV', 'Not Found'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Environment

@@ -14,5 +14,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+    echo 'Test Env Var: ' . config('app.test_var') . ' <br/>';
     return view('welcome');
 });
